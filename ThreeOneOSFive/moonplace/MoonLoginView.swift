@@ -161,7 +161,7 @@ struct MoonLoginView: View {
             auth.register(
                 username: user,
                 password: password,
-                licenseKey: licenseKey.trimmingCharacters(in: .whitespaces)
+                licenseKey: licenseKey.trimmingCharacters(in: .whitespacesAndNewlines)
             )
         }
     }

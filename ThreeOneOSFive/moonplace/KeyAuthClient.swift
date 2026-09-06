@@ -109,18 +109,7 @@ enum KeyAuthClient {
     // MARK: - Red
 
     private static func post(_ parameters: [String: String]) async throws -> Response {
-        var components = URLComponents(url: apiBase, resolvingAgainstBaseURL: false)
-        let publicParameters = parameters.filter { key, _ in
-            ["type", "name", "ownerid", "ver"].contains(key)
-        }
-        components?.queryItems = publicParameters.map { key, value in
-            URLQueryItem(name: key, value: value)
-        }
-        guard let requestURL = components?.url else {
-            throw KeyAuthError.server("URL de KeyAuth no valida.")
-        }
-
-        var request = URLRequest(url: requestURL)
+        var request = URLRequest(url: apiBase)
         request.httpMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         let formAllowed = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~")
@@ -136,7 +125,8 @@ enum KeyAuthClient {
         let (data, response) = try await session.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse,
               (200..<300).contains(httpResponse.statusCode) else {
-            throw KeyAuthError.server("KeyAuth respondio con un estado HTTP no valido.")
+                        let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+                        throw KeyAuthError.server("KeyAuth HTTP \(statusCode). Espera unos minutos si hubo muchos intentos.")
         }
         do {
             return try JSONDecoder().decode(Response.self, from: data)
