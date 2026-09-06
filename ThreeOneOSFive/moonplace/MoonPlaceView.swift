@@ -22,10 +22,22 @@ struct MoonPlaceView: View {
     /// Para añadir más opciones más adelante: copia el .3105 a esa carpeta,
     /// añádelo en project.pbxproj (Resources) y agrégalo a esta lista.
     static let bundledMoonV2Patches: [(resource: String, name: String)] = [
-        ("HOLO_ARMA_SHADER", "HOLO ARMA SHADER"),
-        ("Wall_Glop_01-034", "Wall Glop 01-034"),
-        ("Wallgloo_98-35", "Wallgloo 98-35"),
-        ("assetindexer", "Asset Indexer"),
+        ("MOON_FFTH_ANTENA_0", "FFTH - Antena 1"),
+        ("MOON_FFTH_ANTENA_1", "FFTH - Antena 2"),
+        ("MOON_FFTH_ANTENA_2", "FFTH - Antena 3"),
+        ("MOON_FFTH_ANTENA_3", "FFTH - Antena 4"),
+        ("MOON_FFTH_SIN_ANTENA_0", "FFTH - Sin antena 1"),
+        ("MOON_FFTH_SIN_ANTENA_1", "FFTH - Sin antena 2"),
+        ("MOON_FFTH_SIN_ANTENA_2", "FFTH - Sin antena 3"),
+        ("MOON_FFTH_SIN_ANTENA_3", "FFTH - Sin antena 4"),
+        ("MOON_FFMAX_ANTENA_0", "FFMAX - Antena 1"),
+        ("MOON_FFMAX_ANTENA_1", "FFMAX - Antena 2"),
+        ("MOON_FFMAX_ANTENA_2", "FFMAX - Antena 3"),
+        ("MOON_FFMAX_ANTENA_3", "FFMAX - Antena 4"),
+        ("MOON_FFMAX_SIN_ANTENA_0", "FFMAX - Sin antena 1"),
+        ("MOON_FFMAX_SIN_ANTENA_1", "FFMAX - Sin antena 2"),
+        ("MOON_FFMAX_SIN_ANTENA_2", "FFMAX - Sin antena 3"),
+        ("MOON_FFMAX_SIN_ANTENA_3", "FFMAX - Sin antena 4"),
     ]
 
     var body: some View {
@@ -229,6 +241,8 @@ private struct MoonV1Section: View {
 
 private struct MoonV2Section: View {
     @ObservedObject var store: PatchProjectStore
+    @State private var family = "FFTH"
+    @State private var antenna = "ANTENA"
 
     /// Nombres de recursos ya instalados en la librería (persistido).
     @AppStorage("moon.v2.installedPatches") private var installedPatchesRaw = ""
@@ -240,8 +254,25 @@ private struct MoonV2Section: View {
     var body: some View {
         List {
             Section {
-                ForEach(MoonPlaceView.bundledMoonV2Patches, id: \.resource) { entry in
+                Picker("Familia", selection: $family) {
+                    Text("FFTH").tag("FFTH")
+                    Text("FFMAX").tag("FFMAX")
+                }
+                .pickerStyle(.segmented)
+                Picker("Antena", selection: $antenna) {
+                    Text("Con antena").tag("ANTENA")
+                    Text("Sin antena").tag("SIN_ANTENA")
+                }
+                .pickerStyle(.segmented)
+            }
+            Section {
+                ForEach(filteredEntries, id: \.resource) { entry in
                     bundledRow(entry)
+                    private var filteredEntries: [(resource: String, name: String)] {
+                        MoonPlaceView.bundledMoonV2Patches.filter { entry in
+                            entry.resource.contains("_\(family)_") && entry.resource.contains("_\(antenna)_")
+                        }
+                    }
                 }
             } header: {
                 Text("MoonV2 options")

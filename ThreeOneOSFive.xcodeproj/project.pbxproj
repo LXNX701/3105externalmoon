@@ -73,10 +73,22 @@
 		3105CB13 /* MoonAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3105CB03; };
 		3105CB14 /* MoonLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3105CB04; };
 		3105CB15 /* MoonPlaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3105CB05; };
-		3105CC11 /* assetindexer.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CC01; };
-		3105CC12 /* HOLO_ARMA_SHADER.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CC02; };
-		3105CC13 /* Wall_Glop_01-034.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CC03; };
-		3105CC14 /* Wallgloo_98-35.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CC04; };
+		3105CD01 /* MOON_FFTH_ANTENA_0.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CD17; };
+		3105CD02 /* MOON_FFTH_ANTENA_1.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CD18; };
+		3105CD03 /* MOON_FFTH_ANTENA_2.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CD19; };
+		3105CD04 /* MOON_FFTH_ANTENA_3.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CD20; };
+		3105CD05 /* MOON_FFTH_SIN_ANTENA_0.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CD21; };
+		3105CD06 /* MOON_FFTH_SIN_ANTENA_1.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CD22; };
+		3105CD07 /* MOON_FFTH_SIN_ANTENA_2.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CD23; };
+		3105CD08 /* MOON_FFTH_SIN_ANTENA_3.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CD24; };
+		3105CD09 /* MOON_FFMAX_ANTENA_0.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CD25; };
+		3105CD10 /* MOON_FFMAX_ANTENA_1.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CD26; };
+		3105CD11 /* MOON_FFMAX_ANTENA_2.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CD27; };
+		3105CD12 /* MOON_FFMAX_ANTENA_3.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CD28; };
+		3105CD13 /* MOON_FFMAX_SIN_ANTENA_0.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CD29; };
+		3105CD14 /* MOON_FFMAX_SIN_ANTENA_1.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CD30; };
+		3105CD15 /* MOON_FFMAX_SIN_ANTENA_2.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CD31; };
+		3105CD16 /* MOON_FFMAX_SIN_ANTENA_3.3105 in Resources */ = {isa = PBXBuildFile; fileRef = 3105CD32; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -164,10 +176,22 @@
 		3105CB03 /* MoonAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonAuthManager.swift; sourceTree = "<group>"; };
 		3105CB04 /* MoonLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonLoginView.swift; sourceTree = "<group>"; };
 		3105CB05 /* MoonPlaceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonPlaceView.swift; sourceTree = "<group>"; };
-		3105CC01 /* assetindexer.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = assetindexer.3105; sourceTree = "<group>"; };
-		3105CC02 /* HOLO_ARMA_SHADER.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = HOLO_ARMA_SHADER.3105; sourceTree = "<group>"; };
-		3105CC03 /* Wall_Glop_01-034.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Wall_Glop_01-034.3105"; sourceTree = "<group>"; };
-		3105CC04 /* Wallgloo_98-35.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Wallgloo_98-35.3105"; sourceTree = "<group>"; };
+		3105CD17 /* MOON_FFTH_ANTENA_0.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = MOON_FFTH_ANTENA_0.3105; sourceTree = "<group>"; };
+		3105CD18 /* MOON_FFTH_ANTENA_1.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = MOON_FFTH_ANTENA_1.3105; sourceTree = "<group>"; };
+		3105CD19 /* MOON_FFTH_ANTENA_2.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = MOON_FFTH_ANTENA_2.3105; sourceTree = "<group>"; };
+		3105CD20 /* MOON_FFTH_ANTENA_3.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = MOON_FFTH_ANTENA_3.3105; sourceTree = "<group>"; };
+		3105CD21 /* MOON_FFTH_SIN_ANTENA_0.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = MOON_FFTH_SIN_ANTENA_0.3105; sourceTree = "<group>"; };
+		3105CD22 /* MOON_FFTH_SIN_ANTENA_1.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = MOON_FFTH_SIN_ANTENA_1.3105; sourceTree = "<group>"; };
+		3105CD23 /* MOON_FFTH_SIN_ANTENA_2.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = MOON_FFTH_SIN_ANTENA_2.3105; sourceTree = "<group>"; };
+		3105CD24 /* MOON_FFTH_SIN_ANTENA_3.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = MOON_FFTH_SIN_ANTENA_3.3105; sourceTree = "<group>"; };
+		3105CD25 /* MOON_FFMAX_ANTENA_0.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = MOON_FFMAX_ANTENA_0.3105; sourceTree = "<group>"; };
+		3105CD26 /* MOON_FFMAX_ANTENA_1.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = MOON_FFMAX_ANTENA_1.3105; sourceTree = "<group>"; };
+		3105CD27 /* MOON_FFMAX_ANTENA_2.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = MOON_FFMAX_ANTENA_2.3105; sourceTree = "<group>"; };
+		3105CD28 /* MOON_FFMAX_ANTENA_3.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = MOON_FFMAX_ANTENA_3.3105; sourceTree = "<group>"; };
+		3105CD29 /* MOON_FFMAX_SIN_ANTENA_0.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = MOON_FFMAX_SIN_ANTENA_0.3105; sourceTree = "<group>"; };
+		3105CD30 /* MOON_FFMAX_SIN_ANTENA_1.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = MOON_FFMAX_SIN_ANTENA_1.3105; sourceTree = "<group>"; };
+		3105CD31 /* MOON_FFMAX_SIN_ANTENA_2.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = MOON_FFMAX_SIN_ANTENA_2.3105; sourceTree = "<group>"; };
+		3105CD32 /* MOON_FFMAX_SIN_ANTENA_3.3105 */ = {isa = PBXFileReference; lastKnownFileType = file; path = MOON_FFMAX_SIN_ANTENA_3.3105; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,10 +332,10 @@
 		3105CA01 /* MoonV2Patches */ = {
 			isa = PBXGroup;
 			children = (
-				3105CC02 /* HOLO_ARMA_SHADER.3105 */,
-				3105CC03 /* Wall_Glop_01-034.3105 */,
-				3105CC04 /* Wallgloo_98-35.3105 */,
-				3105CC01 /* assetindexer.3105 */,
+				3105CD17, 3105CD18, 3105CD19, 3105CD20,
+				3105CD21, 3105CD22, 3105CD23, 3105CD24,
+				3105CD25, 3105CD26, 3105CD27, 3105CD28,
+				3105CD29, 3105CD30, 3105CD31, 3105CD32,
 			);
 			path = MoonV2Patches;
 			sourceTree = "<group>";
@@ -394,10 +418,10 @@
 				files = (
 					3105A211,
 					3105A228,
-					3105CC11,
-					3105CC12,
-					3105CC13,
-					3105CC14,
+					3105CD01, 3105CD02, 3105CD03, 3105CD04,
+					3105CD05, 3105CD06, 3105CD07, 3105CD08,
+					3105CD09, 3105CD10, 3105CD11, 3105CD12,
+					3105CD13, 3105CD14, 3105CD15, 3105CD16,
 				);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
