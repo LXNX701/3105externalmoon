@@ -1,0 +1,39 @@
+name: Build Moon Place IPA (sin Mac)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+
+      - name: Compilar 3105/Moon Place (sin firmar)
+        run: |
+          xcodebuild \
+            -project ThreeOneOSFive.xcodeproj \
+            -target 3105 \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY=""
+
+      - name: Empaquetar IPA sin firmar
+        run: |
+          mkdir -p Payload
+          cp -R "build/Build/Products/Release-iphoneos/3105.app" Payload/
+          zip -qr MoonPlace-unsigned.ipa Payload
+          ls -lh MoonPlace-unsigned.ipa
+
+      - name: Subir IPA como artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MoonPlace-unsigned-ipa
+          path: MoonPlace-unsigned.ipa
+          retention-days: 14
