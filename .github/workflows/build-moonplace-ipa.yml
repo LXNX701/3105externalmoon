@@ -19,7 +19,8 @@ jobs:
             -target 3105 \
             -configuration Release \
             -sdk iphoneos \
-            -derivedDataPath build \
+            SYMROOT="$PWD/build/Build/Products" \
+            OBJROOT="$PWD/build/Build/Intermediates" \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY=""
