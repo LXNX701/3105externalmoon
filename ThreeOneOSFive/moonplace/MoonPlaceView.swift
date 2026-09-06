@@ -268,11 +268,6 @@ private struct MoonV2Section: View {
             Section {
                 ForEach(filteredEntries, id: \.resource) { entry in
                     bundledRow(entry)
-                    private var filteredEntries: [(resource: String, name: String)] {
-                        MoonPlaceView.bundledMoonV2Patches.filter { entry in
-                            entry.resource.contains("_\(family)_") && entry.resource.contains("_\(antenna)_")
-                        }
-                    }
                 }
             } header: {
                 Text("MoonV2 options")
@@ -292,6 +287,12 @@ private struct MoonV2Section: View {
         }
         .listStyle(.insetGrouped)
         .refreshable { store.reload() }
+    }
+
+    private var filteredEntries: [(resource: String, name: String)] {
+        MoonPlaceView.bundledMoonV2Patches.filter { entry in
+            entry.resource.contains("_\(family)_") && entry.resource.contains("_\(antenna)_")
+        }
     }
 
     @ViewBuilder
