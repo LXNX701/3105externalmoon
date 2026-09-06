@@ -84,7 +84,7 @@ enum KeyAuthClient {
             "sessionid": sessionID,
             "username": username,
             "pass": password,
-            "license": license,
+            "key": license,
         ])
     }
 
