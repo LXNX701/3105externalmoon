@@ -20,7 +20,7 @@ struct MoonLoginView: View {
     var body: some View {
         ZStack {
             LinearGradient(
-                colors: [Color.black, Color(indigo).opacity(0.35), Color.black],
+                colors: [Color.black, Color.indigo.opacity(0.35), Color.black],
                 startPoint: .top, endPoint: .bottom
             )
             .ignoresSafeArea()
@@ -41,7 +41,7 @@ struct MoonLoginView: View {
                 .font(.system(size: 64))
                 .foregroundStyle(
                     LinearGradient(
-                        colors: [.white, Color(indigo)],
+                        colors: [.white, Color.indigo],
                         startPoint: .top, endPoint: .bottom
                     )
                 )
@@ -106,7 +106,7 @@ struct MoonLoginView: View {
                 .background(
                     Capsule().fill(
                         LinearGradient(
-                            colors: [Color(indigo), Color.purple],
+                            colors: [Color.indigo, Color.purple],
                             startPoint: .leading, endPoint: .trailing
                         )
                     )
@@ -153,6 +153,6 @@ private extension View {
             .padding(14)
             .background(RoundedRectangle(cornerRadius: 12).fill(Color.black.opacity(0.35)))
             .foregroundStyle(.white)
-            .tint(Color(indigo))
+            .tint(Color.indigo)
     }
 }

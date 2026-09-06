@@ -97,7 +97,7 @@ struct MoonPlaceView: View {
             }
         }
         .preferredColorScheme(.dark)
-        .tint(Color(indigo))
+        .tint(Color.indigo)
     }
 
     private func welcomeBadge(_ user: String) -> some View {
@@ -173,7 +173,7 @@ private struct MoonV1Section: View {
                     VStack(spacing: 10) {
                         Image(systemName: "moonphase.new.moon")
                             .font(.system(size: 42, weight: .light))
-                            .foregroundStyle(Color(indigo))
+                            .foregroundStyle(Color.indigo)
                         Text("MoonV1")
                             .font(.headline)
                         Text("Options for MoonV1 are coming soon. You can already import your own .3105 options created with 3105.")
@@ -268,7 +268,7 @@ private struct MoonV2Section: View {
         let isInstalled = installedSet.contains(entry.resource)
         HStack(spacing: 12) {
             Image(systemName: "shippingbox.fill")
-                .foregroundStyle(Color(indigo))
+                .foregroundStyle(Color.indigo)
                 .frame(width: 26)
             VStack(alignment: .leading, spacing: 3) {
                 Text(entry.name)
@@ -335,7 +335,7 @@ private struct MoonPatchRow: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 10) {
                 Image(systemName: item.isLocked ? "lock.doc.fill" : "moon.zzz.fill")
-                    .foregroundStyle(Color(indigo))
+                    .foregroundStyle(Color.indigo)
                 VStack(alignment: .leading, spacing: 2) {
                     Text(item.project?.name ?? "Locked patch")
                         .font(.body.weight(.semibold))
