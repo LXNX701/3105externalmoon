@@ -11,6 +11,22 @@ jobs:
     steps:
       - name: Descargar código
         uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Verificar recursos de parches
+        shell: bash
+        run: |
+          set -euo pipefail
+          count=$(find ThreeOneOSFive/moonplace/MoonV2Patches -type f -name '*.3105' | wc -l | tr -d ' ')
+          if [ "$count" -ne 16 ]; then
+            echo "Se esperaban 16 paquetes .3105 y se encontraron $count"
+            exit 1
+          fi
+          if grep -R -q '^version https://git-lfs.github.com/spec/v1' ThreeOneOSFive/moonplace/MoonV2Patches; then
+            echo "Git LFS no descargó los paquetes .3105"
+            exit 1
+          fi
 
       - name: Compilar 3105/Moon Place (sin firmar)
         run: |
