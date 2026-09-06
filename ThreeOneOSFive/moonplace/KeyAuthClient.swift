@@ -55,13 +55,15 @@ enum KeyAuthClient {
 
     static func initialize() async throws -> String {
         guard !MoonConfig.keyAuthAppName.hasPrefix("REPLACE_"),
-              !MoonConfig.keyAuthOwnerID.hasPrefix("REPLACE_") else {
+              !MoonConfig.keyAuthOwnerID.hasPrefix("REPLACE_"),
+              !MoonConfig.keyAuthSecret.hasPrefix("REPLACE_") else {
             throw KeyAuthError.notConfigured
         }
         let response = try await post([
             "type": "init",
             "name": MoonConfig.keyAuthAppName,
             "ownerid": MoonConfig.keyAuthOwnerID,
+            "secret": MoonConfig.keyAuthSecret,
             "ver": MoonConfig.keyAuthAppVersion,
         ])
         guard response.success, let sessionID = response.sessionid, !sessionID.isEmpty else {
