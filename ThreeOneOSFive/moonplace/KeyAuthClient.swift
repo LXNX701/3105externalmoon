@@ -8,7 +8,9 @@ import Foundation
 ///   2. `register(username:password:license:)` → crea la cuenta usando una license key.
 ///   3. `login(username:password:)` → entra con usuario y contraseña.
 enum KeyAuthClient {
-    private static let apiBase = URL(string: "https://keyauth.cc/api/1.3/")!
+    private static var apiBase: URL {
+        URL(string: MoonConfig.keyAuthAPIURL)!
+    }
     private static let session: URLSession = {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.timeoutIntervalForRequest = 30
@@ -52,7 +54,8 @@ enum KeyAuthClient {
     // MARK: - Llamadas al API
 
     static func initialize() async throws -> String {
-        guard MoonConfig.keyAuthOwnerID != "PASTE_YOUR_OWNER_ID_HERE" else {
+        guard !MoonConfig.keyAuthAppName.hasPrefix("REPLACE_"),
+              !MoonConfig.keyAuthOwnerID.hasPrefix("REPLACE_") else {
             throw KeyAuthError.notConfigured
         }
         let response = try await post([
@@ -101,12 +104,25 @@ enum KeyAuthClient {
         var request = URLRequest(url: apiBase)
         request.httpMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        let formAllowed = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~")
         let body = parameters
-            .map { "\($0.key)=\($0.value.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")" }
+            .map { key, value in
+                let encodedKey = key.addingPercentEncoding(withAllowedCharacters: formAllowed) ?? key
+                let encodedValue = value.addingPercentEncoding(withAllowedCharacters: formAllowed) ?? value
+                return "\(encodedKey)=\(encodedValue)"
+            }
             .joined(separator: "&")
         request.httpBody = body.data(using: .utf8)
 
-        let (data, _) = try await session.data(for: request)
-        return try JSONDecoder().decode(Response.self, from: data)
+        let (data, response) = try await session.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200..<300).contains(httpResponse.statusCode) else {
+            throw KeyAuthError.server("KeyAuth respondio con un estado HTTP no valido.")
+        }
+        do {
+            return try JSONDecoder().decode(Response.self, from: data)
+        } catch {
+            throw KeyAuthError.server("KeyAuth devolvio una respuesta no valida.")
+        }
     }
 }

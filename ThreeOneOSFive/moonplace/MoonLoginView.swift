@@ -19,11 +19,7 @@ struct MoonLoginView: View {
 
     var body: some View {
         ZStack {
-            LinearGradient(
-                colors: [Color.black, Color.indigo.opacity(0.35), Color.black],
-                startPoint: .top, endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            MoonParticleBackground()
 
             ScrollView {
                 VStack(spacing: 24) {
@@ -45,9 +41,17 @@ struct MoonLoginView: View {
                         startPoint: .top, endPoint: .bottom
                     )
                 )
-            Text("MOON PLACE")
-                .font(.title.bold())
-                .foregroundStyle(.white)
+            if let logo = UIImage(named: "MoonLogo") {
+                Image(uiImage: logo)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: 310, maxHeight: 150)
+                    .shadow(color: .red.opacity(0.7), radius: 18)
+            } else {
+                Text("MOON PLACE")
+                    .font(.title.bold())
+                    .foregroundStyle(.white)
+            }
             Text(mode == .login ? "Welcome back" : "Welcome, new user")
                 .font(.subheadline)
                 .foregroundStyle(.white.opacity(0.7))
@@ -92,6 +96,12 @@ struct MoonLoginView: View {
                     .frame(maxWidth: .infinity)
             }
 
+                    if let status = auth.statusMessage {
+                    Label(status, systemImage: "bolt.horizontal.circle")
+                        .font(.footnote.weight(.medium))
+                        .foregroundStyle(.white.opacity(0.75))
+                    }
+
             Button(action: submit) {
                 Group {
                     if auth.isBusy {
@@ -113,7 +123,9 @@ struct MoonLoginView: View {
                 )
                 .foregroundStyle(.white)
             }
-            .disabled(auth.isBusy || !isValid)
+            .disabled(auth.isBusy)
+            .opacity(auth.isBusy ? 0.7 : 1)
+            .onSubmit(submit)
 
             Text("Access powered by KeyAuth")
                 .font(.caption2)
@@ -134,6 +146,14 @@ struct MoonLoginView: View {
 
     private func submit() {
         let user = username.trimmingCharacters(in: .whitespaces)
+        guard !user.isEmpty else {
+            auth.errorMessage = "Escribe tu usuario."
+            return
+        }
+        guard password.count >= 4 else {
+            auth.errorMessage = "La contrasena debe tener al menos 4 caracteres."
+            return
+        }
         switch mode {
         case .login:
             auth.login(username: user, password: password)
@@ -144,6 +164,39 @@ struct MoonLoginView: View {
                 licenseKey: licenseKey.trimmingCharacters(in: .whitespaces)
             )
         }
+    }
+}
+
+struct MoonParticleBackground: View {
+    @State private var animate = false
+    private let colors: [Color] = [.red, .pink, .purple, .indigo]
+
+    var body: some View {
+        ZStack {
+            LinearGradient(
+                colors: [.black, Color(red: 0.16, green: 0.01, blue: 0.12), .black],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            ForEach(0..<18, id: \.self) { index in
+                Circle()
+                    .fill(colors[index % colors.count].opacity(0.35))
+                    .frame(width: CGFloat(3 + (index % 4) * 2))
+                    .blur(radius: 1)
+                    .offset(
+                        x: CGFloat((index * 47) % 360) - 180,
+                        y: animate
+                            ? CGFloat((index * 71) % 760) - 380
+                            : CGFloat((index * 71 + 110) % 760) - 380
+                    )
+                    .animation(
+                        .easeInOut(duration: Double(4 + index % 5)).repeatForever(autoreverses: true),
+                        value: animate
+                    )
+            }
+        }
+        .ignoresSafeArea()
+        .onAppear { animate = true }
     }
 }
 

@@ -42,24 +42,27 @@ struct MoonPlaceView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                ExploitStatusHeader(appState: appState)
-                Divider()
+            ZStack {
+                MoonParticleBackground()
+                VStack(spacing: 0) {
+                    ExploitStatusHeader(appState: appState)
+                    Divider()
 
-                Picker("", selection: $section) {
-                    ForEach(MoonSection.allCases) { s in
-                        Text(s.rawValue).tag(s)
+                    Picker("", selection: $section) {
+                        ForEach(MoonSection.allCases) { s in
+                            Text(s.rawValue).tag(s)
+                        }
                     }
-                }
-                .pickerStyle(.segmented)
-                .padding(.horizontal)
-                .padding(.vertical, 10)
+                    .pickerStyle(.segmented)
+                    .padding(.horizontal)
+                    .padding(.vertical, 10)
 
-                switch section {
-                case .moonV1:
-                    MoonV1Section(store: store)
-                case .moonV2:
-                    MoonV2Section(store: store)
+                    switch section {
+                    case .moonV1:
+                        MoonV1Section(store: store)
+                    case .moonV2:
+                        MoonV2Section(store: store)
+                    }
                 }
             }
             .navigationTitle("Moon Place")

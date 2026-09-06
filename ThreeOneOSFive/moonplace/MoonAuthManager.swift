@@ -9,6 +9,7 @@ final class MoonAuthManager: ObservableObject {
     @Published var username: String?
     @Published var isBusy = false
     @Published var errorMessage: String?
+    @Published var statusMessage: String?
     @Published var justWelcomed = false
 
     private var sessionID: String?
@@ -25,6 +26,7 @@ final class MoonAuthManager: ObservableObject {
     func register(username: String, password: String, licenseKey: String) {
         guard !isBusy else { return }
         errorMessage = nil
+        statusMessage = "Conectando con KeyAuth..."
         isBusy = true
         Task { [weak self] in
             guard let self else { return }
@@ -52,6 +54,7 @@ final class MoonAuthManager: ObservableObject {
     func login(username: String, password: String) {
         guard !isBusy else { return }
         errorMessage = nil
+        statusMessage = "Conectando con KeyAuth..."
         isBusy = true
         Task { [weak self] in
             guard let self else { return }
@@ -81,6 +84,7 @@ final class MoonAuthManager: ObservableObject {
         username = nil
         isAuthenticated = false
         justWelcomed = false
+        statusMessage = nil
     }
 
     // MARK: - Privado
@@ -118,11 +122,13 @@ final class MoonAuthManager: ObservableObject {
         self.isAuthenticated = true
         self.justWelcomed = !silent
         self.isBusy = false
+        self.statusMessage = nil
     }
 
     private func fail(_ error: Error) {
         errorMessage = error.localizedDescription
         isBusy = false
+        statusMessage = nil
     }
 
     private func saveCredentials(username: String, password: String) {
