@@ -107,7 +107,18 @@ enum KeyAuthClient {
     // MARK: - Red
 
     private static func post(_ parameters: [String: String]) async throws -> Response {
-        var request = URLRequest(url: apiBase)
+        var components = URLComponents(url: apiBase, resolvingAgainstBaseURL: false)
+        let publicParameters = parameters.filter { key, _ in
+            ["type", "name", "ownerid", "ver"].contains(key)
+        }
+        components?.queryItems = publicParameters.map { key, value in
+            URLQueryItem(name: key, value: value)
+        }
+        guard let requestURL = components?.url else {
+            throw KeyAuthError.server("URL de KeyAuth no valida.")
+        }
+
+        var request = URLRequest(url: requestURL)
         request.httpMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         let formAllowed = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~")
