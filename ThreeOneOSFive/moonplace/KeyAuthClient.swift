@@ -62,7 +62,7 @@ enum KeyAuthClient {
             "type": "init",
             "name": MoonConfig.keyAuthAppName,
             "ownerid": MoonConfig.keyAuthOwnerID,
-            "version": MoonConfig.keyAuthAppVersion,
+            "ver": MoonConfig.keyAuthAppVersion,
         ])
         guard response.success, let sessionID = response.sessionid, !sessionID.isEmpty else {
             throw KeyAuthError.server(response.message ?? "No se pudo inicializar la sesión de KeyAuth")
@@ -78,6 +78,9 @@ enum KeyAuthClient {
     ) async throws -> Response {
         try await post([
             "type": "register",
+            "name": MoonConfig.keyAuthAppName,
+            "ownerid": MoonConfig.keyAuthOwnerID,
+            "ver": MoonConfig.keyAuthAppVersion,
             "sessionid": sessionID,
             "username": username,
             "pass": password,
@@ -92,6 +95,9 @@ enum KeyAuthClient {
     ) async throws -> Response {
         try await post([
             "type": "login",
+            "name": MoonConfig.keyAuthAppName,
+            "ownerid": MoonConfig.keyAuthOwnerID,
+            "ver": MoonConfig.keyAuthAppVersion,
             "sessionid": sessionID,
             "username": username,
             "pass": password,
